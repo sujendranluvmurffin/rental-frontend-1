@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, User, ShoppingCart, Menu, X, Calendar } from 'lucide-react';
+import { Search, User, ShoppingCart, Menu, X, Calendar, Heart } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -130,6 +130,11 @@ export const Navbar = ({ searchTerm: propSearchTerm, onSearchChange }: NavbarPro
           <nav className="hidden md:flex items-center space-x-8">
             <Link to="/" className="text-sm font-medium transition-colors hover:text-primary">Home</Link>
             <Link to="/products" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Browse</Link>
+            {user?.role === 'host' ? (
+              <Link to="/host/dashboard" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Dashboard</Link>
+            ) : (
+              <Link to="/favorites" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Favorites</Link>
+            )}
             <a href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Categories</a>
             <a href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">How it Works</a>
             <a href="#" className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary">Support</a>
@@ -149,6 +154,15 @@ export const Navbar = ({ searchTerm: propSearchTerm, onSearchChange }: NavbarPro
           {/* Right Actions */}
           <div className="flex items-center space-x-2">
             <RoleSwitcher />
+            
+            {isAuthenticated && user?.role === 'renter' && (
+              <Link to="/favorites">
+                <Button variant="ghost" size="sm" className="relative">
+                  <Heart className="h-4 w-4" />
+                  {/* You can add a badge here for favorite count */}
+                </Button>
+              </Link>
+            )}
             
             {isAuthenticated ? (
               <div className="flex items-center space-x-2">
