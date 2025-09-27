@@ -1,6 +1,11 @@
 import { Star, ShoppingCart, Heart } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useToast } from '@/hooks/use-toast';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { toggleFavorite } from '@/store/slices/productsSlice';
 import { Product } from '../../types/product';
 
 interface ProductCardProps {
