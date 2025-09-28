@@ -1,4 +1,4 @@
-import { Star, ShoppingCart, Heart } from 'lucide-react';
+import { Star, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from '@/components/ui/badge';

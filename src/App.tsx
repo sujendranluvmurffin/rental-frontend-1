@@ -3,24 +3,30 @@ import { Provider } from 'react-redux';
 import { store } from './store/store';
 import { ThemeProvider } from './components/providers/ThemeProvider';
 import { Navbar } from './components/layout/Navbar';
+import { HostNavbar } from './components/layout/HostNavbar';
 import { Footer } from './components/layout/Footer';
 import { Home } from './pages/Home';
 import { Products } from './pages/Products';
 import { ProductDetail } from './pages/ProductDetail';
 import { Favorites } from './pages/Favorites';
 import { Profile } from './pages/Profile';
+import { HostProfile } from './pages/HostProfile';
 import { HostDashboard } from './pages/HostDashboard';
 import { HostKYC } from './pages/HostKYC';
 import { CreateProduct } from './pages/CreateProduct';
 import { Toaster } from '@/components/ui/toaster';
+import { useAppSelector } from './hooks';
 
 function App() {
+  const { user } = useAppSelector((state) => state.auth);
+  const isHost = user?.role === 'host';
+
   return (
     <Provider store={store}>
       <ThemeProvider>
         <Router>
           <div className="min-h-screen bg-background">
-            <Navbar />
+            {isHost ? <HostNavbar /> : <Navbar />}
             
             <main>
               <Routes>
@@ -29,6 +35,7 @@ function App() {
                 <Route path="/product/:id" element={<ProductDetail />} />
                 <Route path="/favorites" element={<Favorites />} />
                 <Route path="/profile" element={<Profile />} />
+                <Route path="/host/profile" element={<HostProfile />} />
                 <Route path="/host/dashboard" element={<HostDashboard />} />
                 <Route path="/host/kyc" element={<HostKYC />} />
                 <Route path="/host/create-product" element={<CreateProduct />} />
