@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Search, User, Menu, X, Plus, Package, BarChart3, Settings } from 'lucide-react';
+import { Search, User, Menu, X, Plus, Package, ChartBar as BarChart3, Settings } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
