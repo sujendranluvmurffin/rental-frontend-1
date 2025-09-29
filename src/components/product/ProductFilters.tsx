@@ -9,10 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Filter, X } from 'lucide-react';
 import { categories } from '../../data/products';
 import { useState } from 'react';
-<<<<<<< HEAD
 import { SearchWithSuggestions } from '../ui/search-with-suggestions';
-=======
->>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
 
 interface ProductFiltersProps {
   selectedCategory: string;
@@ -30,11 +27,8 @@ interface ProductFiltersProps {
   onAvailabilityChange?: (availability: 'all' | 'available' | 'unavailable') => void;
   locationFilter?: string;
   onLocationChange?: (location: string) => void;
-<<<<<<< HEAD
   searchTerm?: string;
   onSearchChange?: (search: string) => void;
-=======
->>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
 }
 
 const commonFeatures = [
@@ -63,13 +57,9 @@ export const ProductFilters = ({
   availabilityFilter = 'all',
   onAvailabilityChange,
   locationFilter = '',
-<<<<<<< HEAD
   onLocationChange,
   searchTerm = '',
   onSearchChange
-=======
-  onLocationChange
->>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
 }: ProductFiltersProps) => {
   const [showAdvancedFilters, setShowAdvancedFilters] = useState(false);
 
@@ -89,10 +79,7 @@ export const ProductFilters = ({
     onFeaturesChange?.([]);
     onAvailabilityChange?.('all');
     onLocationChange?.('');
-<<<<<<< HEAD
     onSearchChange?.('');
-=======
->>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
   };
 
   const activeFiltersCount = [
@@ -100,17 +87,12 @@ export const ProductFilters = ({
     priceRange[0] > 0 || priceRange[1] < 1000,
     selectedFeatures.length > 0,
     availabilityFilter !== 'all',
-<<<<<<< HEAD
     locationFilter.length > 0,
     searchTerm.length > 0
-=======
-    locationFilter.length > 0
->>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
   ].filter(Boolean).length;
 
   return (
     <div className="space-y-4">
-<<<<<<< HEAD
       {/* Search Bar */}
       {onSearchChange && (
         <div className="max-w-md">
@@ -123,8 +105,6 @@ export const ProductFilters = ({
         </div>
       )}
 
-=======
->>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
         <div className="flex items-center space-x-4">
           <span className="text-sm text-muted-foreground">
@@ -162,7 +142,6 @@ export const ProductFilters = ({
                 {activeFiltersCount}
               </Badge>
             )}
-<<<<<<< HEAD
             {searchTerm && (
               <Badge variant="secondary" className="flex items-center gap-1">
                 "{searchTerm}"
@@ -174,8 +153,6 @@ export const ProductFilters = ({
                 </button>
               </Badge>
             )}
-=======
->>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
           </Button>
 
           {/* Category Filter */}
