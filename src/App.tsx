@@ -2,7 +2,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './components/providers/ThemeProvider';
 import { Navbar } from './components/layout/Navbar';
 import { HostNavbar } from './components/layout/HostNavbar';
+<<<<<<< HEAD
 import { AdminNavbar } from './components/layout/AdminNavbar';
+=======
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
 import { Footer } from './components/layout/Footer';
 import { Chatbot } from './components/ui/chatbot';
 import { Home } from './pages/Home';
@@ -27,7 +30,31 @@ import { useAppSelector } from './hooks';
 function App() {
   const { user } = useAppSelector((state) => state.auth);
   const isHost = user?.role === 'host';
+<<<<<<< HEAD
   const isAdmin = user?.email === 'admin@renthub.com';
+=======
+
+  return (
+    <Provider store={store}>
+      <ThemeProvider>
+        <Router>
+          <div className="min-h-screen bg-background">
+            {isHost ? <HostNavbar /> : <Navbar />}
+            
+            <main>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/products" element={<Products />} />
+                <Route path="/product/:id" element={<ProductDetail />} />
+                <Route path="/favorites" element={<Favorites />} />
+                <Route path="/profile" element={<Profile />} />
+                <Route path="/host/profile" element={<HostProfile />} />
+                <Route path="/host/dashboard" element={<HostDashboard />} />
+                <Route path="/host/kyc" element={<HostKYC />} />
+                <Route path="/host/create-product" element={<CreateProduct />} />
+              </Routes>
+            </main>
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
 
   return (
     <ThemeProvider>

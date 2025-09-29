@@ -17,8 +17,12 @@ import {
   setPriceRange,
   setSelectedFeatures,
   setAvailabilityFilter,
+<<<<<<< HEAD
   setLocationFilter,
   setSearchTerm
+=======
+  setLocationFilter
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
 } from '../store/slices/productsSlice';
 import { mockProducts } from '../data/products';
 import { useMemo } from 'react';
@@ -177,8 +181,11 @@ export const Home = () => {
               onAvailabilityChange={(availability) => dispatch(setAvailabilityFilter(availability))}
               locationFilter={locationFilter}
               onLocationChange={(location) => dispatch(setLocationFilter(location))}
+<<<<<<< HEAD
               searchTerm={searchTerm}
               onSearchChange={(search) => dispatch(setSearchTerm(search))}
+=======
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
             />
           )}
 

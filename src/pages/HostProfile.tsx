@@ -1,7 +1,11 @@
 import { useState } from 'react';
+<<<<<<< HEAD
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+=======
+import { useNavigate } from 'react-router-dom';
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
 import { ArrowLeft, User, Mail, Phone, MapPin, Camera, Upload, Save, Shield, CircleCheck as CheckCircle, CircleAlert as AlertCircle, Clock, FileText, Video } from 'lucide-react';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
@@ -37,6 +41,7 @@ export const HostProfile = () => {
     taxId: '***-**-1234'
   });
 
+<<<<<<< HEAD
   // Check if profile is complete
   const isProfileComplete = useMemo(() => {
     const requiredFields = [
@@ -50,6 +55,8 @@ export const HostProfile = () => {
     return requiredFields.every(field => field.trim().length > 0);
   }, [formData]);
 
+=======
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
   const [kycStatus] = useState({
     phoneVerified: true,
     identityVerified: true,
@@ -165,6 +172,7 @@ export const HostProfile = () => {
               <p className="text-sm text-muted-foreground mt-2">
                 Complete your profile to increase trust with renters
               </p>
+<<<<<<< HEAD
               {calculateProfileCompletion() < 100 && (
                 <Button
                   size="sm"
@@ -173,6 +181,8 @@ export const HostProfile = () => {
                   Continue Your Profile
                 </Button>
               )}
+=======
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
             </CardContent>
           </Card>
 
@@ -340,6 +350,7 @@ export const HostProfile = () => {
                 <p className="text-sm text-muted-foreground mb-3">
                   Verify your phone number to enable secure communication
                 </p>
+<<<<<<< HEAD
                 <div className="flex items-center justify-between">
                   <Badge variant={kycStatus.phoneVerified ? 'default' : 'secondary'}>
                     {getKycStatusText(kycStatus.phoneVerified)}
@@ -350,6 +361,11 @@ export const HostProfile = () => {
                     </Button>
                   )}
                 </div>
+=======
+                <Badge variant={kycStatus.phoneVerified ? 'default' : 'secondary'}>
+                  {getKycStatusText(kycStatus.phoneVerified)}
+                </Badge>
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
               </CardContent>
             </Card>
 
@@ -367,6 +383,7 @@ export const HostProfile = () => {
                 <p className="text-sm text-muted-foreground mb-3">
                   Government ID and live video verification completed
                 </p>
+<<<<<<< HEAD
                 <div className="flex items-center justify-between">
                   <Badge variant={kycStatus.identityVerified ? 'default' : 'secondary'}>
                     {getKycStatusText(kycStatus.identityVerified)}
@@ -377,6 +394,11 @@ export const HostProfile = () => {
                     </Button>
                   )}
                 </div>
+=======
+                <Badge variant={kycStatus.identityVerified ? 'default' : 'secondary'}>
+                  {getKycStatusText(kycStatus.identityVerified)}
+                </Badge>
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
               </CardContent>
             </Card>
 
@@ -421,6 +443,7 @@ export const HostProfile = () => {
                 <p className="text-sm text-muted-foreground mb-3">
                   Link your bank account for secure payments
                 </p>
+<<<<<<< HEAD
                 <div className="flex items-center justify-between">
                   <Badge variant={kycStatus.bankVerified ? 'default' : 'secondary'}>
                     {getKycStatusText(kycStatus.bankVerified)}
@@ -431,6 +454,11 @@ export const HostProfile = () => {
                     </Button>
                   )}
                 </div>
+=======
+                <Badge variant={kycStatus.bankVerified ? 'default' : 'secondary'}>
+                  {getKycStatusText(kycStatus.bankVerified)}
+                </Badge>
+>>>>>>> 0bbf254d17167095374da935a90ef3acd2ceb7c7
               </CardContent>
             </Card>
           </div>
