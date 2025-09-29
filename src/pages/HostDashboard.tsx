@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react';
-import { Plus, Package, DollarSign, Calendar, Eye, CreditCard as Edit, Trash2, CircleAlert as AlertCircle } from 'lucide-react';
+import { Plus, Package, DollarSign, Calendar, Eye, CreditCard as Edit, Trash2, CircleAlert as AlertCircle, User } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
@@ -12,6 +12,9 @@ import { mockProducts } from '../data/products';
 export const HostDashboard = () => {
   const { user, isAuthenticated } = useAppSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState('overview');
+  
+  // Check if profile is complete
+  const isProfileComplete = user?.name && user?.email; // Simplified check
 
   // Mock hosted products - in real app, this would come from API
   const hostedProducts = useMemo(() => {
@@ -84,6 +87,21 @@ export const HostDashboard = () => {
         </TabsList>
 
         <TabsContent value="overview" className="space-y-6">
+          {/* Profile Completion Alert */}
+          {!isProfileComplete && (
+            <Alert>
+              <User className="h-4 w-4" />
+              <AlertDescription className="flex items-center justify-between">
+                <span>Complete your profile to increase trust with renters and get more bookings.</span>
+                <Link to="/host/complete-profile">
+                  <Button size="sm" className="ml-4">
+                    Complete Profile
+                  </Button>
+                </Link>
+              </AlertDescription>
+            </Alert>
+          )}
+          
           {/* Stats Cards */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             <Card>

@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { Hero } from '../components/layout/Hero';
+import { HomeBanners } from '../components/layout/HomeBanners';
 import { SkeletonHero } from '../components/ui/skeleton-hero';
 import { ProductGrid } from '../components/product/ProductGrid';
 import { ProductFilters } from '../components/product/ProductFilters';
@@ -9,11 +10,15 @@ import { useAppSelector, useAppDispatch } from '../hooks';
 import { 
   setProducts, 
   setLoading, 
-  setSearchTerm, 
   setSelectedCategory, 
   setCurrentPage, 
   setSortBy, 
-  setSortOrder 
+  setSortOrder,
+  setPriceRange,
+  setSelectedFeatures,
+  setAvailabilityFilter,
+  setLocationFilter,
+  setSearchTerm
 } from '../store/slices/productsSlice';
 import { mockProducts } from '../data/products';
 import { useMemo } from 'react';
@@ -27,7 +32,11 @@ export const Home = () => {
     selectedCategory,
     currentPage,
     sortBy,
-    sortOrder
+    sortOrder,
+    priceRange,
+    selectedFeatures,
+    availabilityFilter,
+    locationFilter
   } = useAppSelector((state) => state.products);
   const { isAuthenticated, user } = useAppSelector((state) => state.auth);
 
@@ -59,6 +68,37 @@ export const Home = () => {
       filtered = filtered.filter(product => product.category === selectedCategory);
     }
 
+    // Price range filter
+    filtered = filtered.filter(product => 
+      product.price >= priceRange[0] && product.price <= priceRange[1]
+    );
+
+    // Features filter
+    if (selectedFeatures.length > 0) {
+      filtered = filtered.filter(product =>
+        selectedFeatures.some(feature => 
+          product.features.some(pFeature => 
+            pFeature.toLowerCase().includes(feature.toLowerCase())
+          )
+        )
+      );
+    }
+
+    // Availability filter
+    if (availabilityFilter !== 'all') {
+      filtered = filtered.filter(product => 
+        availabilityFilter === 'available' ? product.inStock : !product.inStock
+      );
+    }
+
+    // Location filter
+    if (locationFilter) {
+      filtered = filtered.filter(product =>
+        product.location.city.toLowerCase().includes(locationFilter.toLowerCase()) ||
+        product.location.address.toLowerCase().includes(locationFilter.toLowerCase())
+      );
+    }
+
     filtered.sort((a, b) => {
       let comparison = 0;
       
@@ -78,7 +118,7 @@ export const Home = () => {
     });
 
     return filtered;
-  }, [searchTerm, selectedCategory, sortBy, sortOrder]);
+  }, [searchTerm, selectedCategory, sortBy, sortOrder, priceRange, selectedFeatures, availabilityFilter, locationFilter]);
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
   const currentProducts = filteredProducts.slice(
@@ -90,6 +130,9 @@ export const Home = () => {
     <>
       {/* Hero Section */}
       {loading ? <SkeletonHero /> : <Hero />}
+
+      {/* Banners Section */}
+      <HomeBanners />
 
       {/* Featured Products Section */}
       <section className="py-12 lg:py-16">
@@ -126,6 +169,16 @@ export const Home = () => {
               onSortChange={(sort) => dispatch(setSortBy(sort))}
               onSortOrderChange={(order) => dispatch(setSortOrder(order))}
               totalProducts={filteredProducts.length}
+              priceRange={priceRange}
+              onPriceRangeChange={(range) => dispatch(setPriceRange(range))}
+              selectedFeatures={selectedFeatures}
+              onFeaturesChange={(features) => dispatch(setSelectedFeatures(features))}
+              availabilityFilter={availabilityFilter}
+              onAvailabilityChange={(availability) => dispatch(setAvailabilityFilter(availability))}
+              locationFilter={locationFilter}
+              onLocationChange={(location) => dispatch(setLocationFilter(location))}
+              searchTerm={searchTerm}
+              onSearchChange={(search) => dispatch(setSearchTerm(search))}
             />
           )}
 
