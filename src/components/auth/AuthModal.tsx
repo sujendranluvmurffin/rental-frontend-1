@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Dialog, DialogContent } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog';
 import { LoginForm } from './LoginForm';
 import { SignupForm } from './SignupForm';
 
@@ -21,6 +21,9 @@ export const AuthModal = ({ isOpen, onClose, defaultMode = 'login' }: AuthModalP
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-md p-0 gap-0">
+        <DialogTitle className="sr-only">
+          {mode === 'login' ? 'Login to RentHub' : 'Sign up for RentHub'}
+        </DialogTitle>
         {mode === 'login' ? (
           <LoginForm
             onSwitchToSignup={() => setMode('signup')}
