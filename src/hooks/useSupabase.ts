@@ -11,6 +11,7 @@ export const useSupabase = () => {
   useEffect(() => {
     // Get initial session
     const getInitialSession = async () => {
+      setLoading(true);
       try {
         const { data: { session } } = await supabase.auth.getSession();
         
@@ -19,11 +20,9 @@ export const useSupabase = () => {
         }
       } catch (error) {
         console.error('Error getting initial session:', error);
-        // Don't keep loading if there's an error
+      } finally {
         setLoading(false);
       }
-      
-      setLoading(false);
     };
 
     // Listen for auth changes
@@ -37,8 +36,6 @@ export const useSupabase = () => {
           }
         } catch (error) {
           console.error('Error handling auth state change:', error);
-          // Don't keep loading if there's an error
-          setLoading(false);
         }
       }
     );
