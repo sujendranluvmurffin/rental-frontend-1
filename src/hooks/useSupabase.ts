@@ -19,6 +19,8 @@ export const useSupabase = () => {
         }
       } catch (error) {
         console.error('Error getting initial session:', error);
+        // Don't keep loading if there's an error
+        setLoading(false);
       }
       
       setLoading(false);
@@ -35,8 +37,9 @@ export const useSupabase = () => {
           }
         } catch (error) {
           console.error('Error handling auth state change:', error);
+          // Don't keep loading if there's an error
+          setLoading(false);
         }
-        setLoading(false);
       }
     );
 
@@ -68,8 +71,26 @@ export const useSupabase = () => {
             avatar: user.user_metadata?.avatar_url,
             role: 'renter', // Default role
           }));
+        } else if (error.code === 'PGRST205') {
+          // Table doesn't exist - database not set up
+          console.log('Database not set up, using basic user info');
+          dispatch(loginSuccess({
+            id: user.id,
+            name: user.user_metadata?.name || user.email?.split('@')[0] || 'User',
+            email: user.email || '',
+            avatar: user.user_metadata?.avatar_url,
+            role: 'renter', // Default role
+          }));
         } else {
           console.error('Error fetching profile:', error);
+          // Still allow basic login even if profile fetch fails
+          dispatch(loginSuccess({
+            id: user.id,
+            name: user.user_metadata?.name || user.email?.split('@')[0] || 'User',
+            email: user.email || '',
+            avatar: user.user_metadata?.avatar_url,
+            role: 'renter', // Default role
+          }));
         }
         return;
       }
@@ -86,6 +107,14 @@ export const useSupabase = () => {
       }
     } catch (error) {
       console.error('Error handling user session:', error);
+      // Fallback to basic user info if database operations fail
+      dispatch(loginSuccess({
+        id: user.id,
+        name: user.user_metadata?.name || user.email?.split('@')[0] || 'User',
+        email: user.email || '',
+        avatar: user.user_metadata?.avatar_url,
+        role: 'renter', // Default role
+      }));
     }
   };
 

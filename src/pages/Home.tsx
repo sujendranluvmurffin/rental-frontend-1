@@ -45,9 +45,17 @@ export const Home = () => {
   useEffect(() => {
     const loadProducts = async () => {
       dispatch(setLoading(true));
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      dispatch(setProducts(mockProducts));
-      dispatch(setLoading(false));
+      try {
+        // Simulate loading time
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        dispatch(setProducts(mockProducts));
+      } catch (error) {
+        console.error('Error loading products:', error);
+        // Still show mock products if there's an error
+        dispatch(setProducts(mockProducts));
+      } finally {
+        dispatch(setLoading(false));
+      }
     };
 
     loadProducts();
