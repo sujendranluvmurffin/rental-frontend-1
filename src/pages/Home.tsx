@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { SEO } from '../components/seo/SEO';
 import { Hero } from '../components/layout/Hero';
 import { HomeBanners } from '../components/layout/HomeBanners';
 import { SkeletonHero } from '../components/ui/skeleton-hero';
@@ -137,6 +138,11 @@ export const Home = () => {
 
   return (
     <>
+      <SEO
+        title="RentHub - Rent Anything, Anytime"
+        description="Discover and rent quality items from trusted hosts in your community. From electronics to furniture, find what you need on RentHub."
+        keywords={['rental marketplace', 'rent electronics', 'peer to peer rental', 'rent furniture', 'rent gadgets', 'share economy']}
+      />
       {/* Hero Section */}
       {loading ? <SkeletonHero /> : <Hero />}
 

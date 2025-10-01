@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -15,6 +16,7 @@ interface LoginFormProps {
 }
 
 export const LoginForm = ({ onSwitchToSignup, onClose }: LoginFormProps) => {
+  const navigate = useNavigate();
   const { toast } = useToast();
   const { signIn } = useSupabase();
   
@@ -151,16 +153,13 @@ export const LoginForm = ({ onSwitchToSignup, onClose }: LoginFormProps) => {
               variant="link"
               className="text-sm"
               onClick={() => {
-                // TODO: Implement forgot password
-                toast({
-                  title: "Feature Coming Soon",
-                  description: "Password reset functionality will be available soon.",
-                });
+                onClose?.();
+                navigate('/password-reset');
               }}
             >
               Forgot your password?
             </Button>
-            
+
             <div className="text-sm text-muted-foreground">
               Don't have an account?{' '}
               <Button
